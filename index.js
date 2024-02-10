@@ -44,7 +44,45 @@ app
   })
   .patch((req, res) => {
     // TODO: Edit new user with id
-    return res.json({ status: "pending" });
+    const id = Number(req.params.id);
+    const { first_name, last_name, email, gender, job_title } = req.body;
+
+    const user = users.find((user) => user.id === id);
+    const updatedUserData = {
+      ...user,
+      first_name,
+      last_name,
+      email,
+      gender,
+      job_title,
+    };
+
+    fs.readFile("./MOCK_DATA.json", "utf8", (err, data) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      const userData = JSON.parse(data);
+
+      const userDataWithoutTheIdUser = userData.filter(
+        (user) => user.id !== id
+      );
+
+      const newUserData = { ...userDataWithoutTheIdUser, updatedUserData };
+      //   return res.json(newUserData);
+
+      fs.writeFile(
+        "./MOCK_DATA.json",
+        JSON.stringify(newUserData),
+        "utf8",
+        (err) => {
+          if (err) console.log(err);
+        }
+      );
+    });
+
+    return res.json({ status: `Updated the user with id : ${id}.` });
   })
   .delete((req, res) => {
     // TODO: Delete new user with id
