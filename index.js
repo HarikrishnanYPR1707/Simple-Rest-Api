@@ -5,5 +5,8 @@ const app = express();
 const port = 8000;
 
 // Routes
+app.get("/users", (req, res) => {
+  return res.json(users);
+});
 
 app.listen(port, () => console.log("Server Started!!"));
