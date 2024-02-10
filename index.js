@@ -19,25 +19,24 @@ app.get("/api/users", (req, res) => {
   return res.json(users);
 });
 
-app.get("/api/users/:id", (req, res) => {
-  const id = Number(req.params.id);
-  const user = users.find((user) => user.id === id);
-  return res.json(user);
-});
-
-app.post("/api/users", (req, res) => {
-  // TODO: Create new user
-  return res.json({ status: pending });
-});
-
-app.patch("/api/users/:id", (req, res) => {
-  // TODO: Edit new user with id
-  return res.json({ status: pending });
-});
-
-app.delete("/api/users/:id", (req, res) => {
-  // TODO: Delete new user with id
-  return res.json({ status: pending });
-});
+app
+  .route("/api/users/:id")
+  .get((req, res) => {
+    const id = Number(req.params.id);
+    const user = users.find((user) => user.id === id);
+    return res.json(user);
+  })
+  .post((req, res) => {
+    // TODO: Create new user
+    return res.json({ status: pending });
+  })
+  .patch((req, res) => {
+    // TODO: Edit new user with id
+    return res.json({ status: pending });
+  })
+  .delete((req, res) => {
+    // TODO: Delete new user with id
+    return res.json({ status: pending });
+  });
 
 app.listen(port, () => console.log("Server Started!!"));
