@@ -19,6 +19,11 @@ app.get("/api/users", (req, res) => {
   return res.json(users);
 });
 
+app.post("/api/users", (req, res) => {
+  // TODO: Create new user
+  return res.json({ status: "pending" });
+});
+
 app
   .route("/api/users/:id")
   .get((req, res) => {
@@ -28,15 +33,15 @@ app
   })
   .post((req, res) => {
     // TODO: Create new user
-    return res.json({ status: pending });
+    return res.json({ status: "pending" });
   })
   .patch((req, res) => {
     // TODO: Edit new user with id
-    return res.json({ status: pending });
+    return res.json({ status: "pending" });
   })
   .delete((req, res) => {
     // TODO: Delete new user with id
-    return res.json({ status: pending });
+    return res.json({ status: "pending" });
   });
 
 app.listen(port, () => console.log("Server Started!!"));
