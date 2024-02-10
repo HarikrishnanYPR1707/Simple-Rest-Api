@@ -5,7 +5,7 @@ const app = express();
 const port = 8000;
 
 // Routes
-app.get("/users", (req, res) => {
+app.get("/api/users", (req, res) => {
   return res.json(users);
 });
 
