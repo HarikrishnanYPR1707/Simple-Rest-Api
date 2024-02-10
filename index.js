@@ -48,7 +48,31 @@ app
   })
   .delete((req, res) => {
     // TODO: Delete new user with id
-    return res.json({ status: "pending" });
+    const id = Number(req.params.id);
+
+    fs.readFile("./MOCK_DATA.json", "utf8", (err, data) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      // data is of type string , userData is of type object
+      const userData = JSON.parse(data);
+
+      // userData is of type object
+      const updatedUserData = userData.filter((user) => user.id !== id);
+
+      fs.writeFile(
+        "./MOCK_DATA.json",
+        JSON.stringify(updatedUserData),
+        "utf8",
+        (err) => {
+          if (err) console.log(err);
+        }
+      );
+    });
+
+    return res.json({ status: `Delted the users with ${id}.` });
   });
 
 app.listen(port, () => console.log("Server Started!!"));
