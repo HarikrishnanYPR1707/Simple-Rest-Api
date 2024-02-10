@@ -4,6 +4,9 @@ const users = require("./MOCK_DATA.json");
 const app = express();
 const port = 8000;
 
+// Middleware - Plugin
+app.use(express.urlencoded({ extended: false }));
+
 // Routes
 app.get("/users", (req, res) => {
   const html = `
@@ -20,7 +23,9 @@ app.get("/api/users", (req, res) => {
 });
 
 app.post("/api/users", (req, res) => {
-  // TODO: Create new user
+  const body = req.body;
+  console.log(body);
+
   return res.json({ status: "pending" });
 });
 
